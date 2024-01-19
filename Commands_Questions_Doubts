@@ -1,0 +1,30 @@
+****** Uninstall old versions ******
+    Older versions of Docker went by docker or docker-engine. Uninstall any such older
+    versions before attempting to install a new version, along with associated dependencies.
+Ans: sudo dnf remove docker \
+      docker-client \
+      docker-client-latest \
+      docker-common \
+      docker-latest \
+      docker-latest-logrotate \
+      docker-logrotate \
+      docker-selinux \
+      docker-engine-selinux \ 
+      docker-engine
+
+
+
+
+*****   what is the use of -p 50000:50000 is in docker run command? *******
+In a Docker run command, the -p option is used to map ports between the Docker container and the host machine. The syntax for the -p option is -p hostPort:containerPort.
+In the specific case you mentioned, -p 50000:50000 means that you are mapping port 50000 from the host machine to port 50000 inside the Docker container.
+For example:   docker run -p 50000:50000 <image_name>
+Here's what this does:
+
+hostPort: This is the port on your host machine. In this case, it's 50000.
+containerPort: This is the port inside the Docker container. Again, it's 50000 in this example.
+This port mapping is commonly used in scenarios where a service inside the Docker container is running on a specific port, and you want to make it accessible from the host machine.
+
+In the context of Jenkins (as you've mentioned port 50000), this is often used for Jenkins agent connections. Jenkins agents can connect 
+to the Jenkins master using the Java Network Launch Protocol (JNLP) on port 50000, and by specifying this port mapping, you're making sure 
+that the host machine can receive connections on port 50000 and forward them to the same port inside the Docker container where Jenkins is listening for agent connections.
